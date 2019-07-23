@@ -1,6 +1,6 @@
 <template lang="pug">
     .row 
-        quote(v-for='quote in quotes') {{quote}} 
+        quote(v-for='(quote, index) in quotes' @click.native="deleteQuote(index)") {{quote}} 
 </template>
 
 
@@ -10,7 +10,12 @@ export default {
     props: ['quotes'],
     components: {
         quote: Quote,
-    }
+    },
+    methods: {
+        deleteQuote(index) {
+            this.$emit('quoteDeleted', index)
+        }
+    },
 }
 </script>
 
